@@ -1,0 +1,26 @@
+<div class="login-page">
+    <div classs="card">
+        <div>
+            <span >Login</span>
+           
+        <div classs="container">
+            <form [formGroup]="form" (ngSubmit)="loginUser()">
+                <p>
+                    <label for="username">Username</label>
+                    <input class="form-control" placeholder="Username" formControlName="username" /> 
+                </p>
+                <p>
+                    <label for="password">Password</label>
+                    <input class="form-control" placeholder="Password" type="password" formControlName="password" />
+                </p>
+                <p *ngIf="errorMessage" class="error">
+                    {{ errorMessage }}
+                </p>
+                <div class="button">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

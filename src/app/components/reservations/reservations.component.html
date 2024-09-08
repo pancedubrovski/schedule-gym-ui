@@ -1,0 +1,49 @@
+<div>
+
+  <div *ngIf="groupByPlace.length > 0">
+    <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Place Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (reservation of reservations; track reservations.id ) {
+      <tr>
+        <td>
+          {{ reservation.id }}
+        </td>
+        <td>
+          {{ reservation?.place?.name }}
+        </td>
+        <td>
+          {{ reservation?.date | date:'dd/MM/yyyy'}}
+        </td>
+        <td>
+          {{ reservation?.startTime | date:'hh:mm'}}
+        </td>
+        <td>
+          {{ reservation?.endTime | date:'hh:mm' }}
+        </td>
+        <td>
+          {{ reservation?.user?.fullName }}
+        </td>
+        <td>
+          {{ reservation?.totalPrice | number: '1.2-2' }} EUR
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+
+</div>

@@ -1,0 +1,45 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Resservation</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form">
+            <div class="mb-3">
+                <label for="date">Date of reservation</label>
+                <div class="input-group">
+                    <input id="date" class="form-control" formControlName="date" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                        #dp="ngbDatepicker"  />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()"
+                        type="button"></button>
+
+                    <!-- <ngb-datepicker [minDate]="{year: 2010, month: 1, day: 1}"
+                        [maxDate]="{year: 2048, month: 12, day: 31}" [markDisabled]="isDisabled">
+                    </ngb-datepicker> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-5 input-filds">
+                    <label for="startTime">Start Time</label>
+                    <ngb-timepicker [spinners]="false" formControlName="startTime" />
+                </div>
+                <div class="form-group col-5 input-filds">
+                    <label for="endTime">End Time</label>
+                    <ngb-timepicker [spinners]="false" formControlName="endTime" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea formControlName="description" class="form-control" id="description"></textarea>
+            </div>
+
+            <h5 *ngIf="totalPrice">TOTAL PRICE: {{ hours }} X {{ price | number: '1.2-2' }} EUR = {{ totalPrice |
+                number: '1.2-2'}} EUR</h5>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="reservePlace()">Reserve</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Reserve</button>

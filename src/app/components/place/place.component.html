@@ -1,0 +1,71 @@
+<div *ngIf="isLoaded" class="contaner">
+    <div class="row">
+        <div class="col-md-7 col-sm-12 card-item">
+            <ngb-carousel *ngIf="images" class="images" [showNavigationArrows]="true" [showNavigationIndicators]="true">
+                <ng-template ngbSlide *ngFor="let image of images">
+                    <div class="picsum-img-wrapper">
+                        <img class="image" [src]="image" alt="Random slide" />
+                    </div>
+                    <div class="carousel-caption">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+        <div class="col-md-4 col-sm-12 card-item">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{place?.name}}</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item item">City: {{ place.city }}</li>
+                        <li class="list-group-item item">Kind: {{ place.kind }}</li>
+                        <li class="list-group-item item">Capacity: {{ place.capacity }}</li>
+
+                        <li class="list-group-item">
+                            <h5>
+                                Price: <span class="price">{{ place.price | number: '1.2-2' }} EUR</span>
+                            </h5>
+                        </li>
+                    </ul>
+
+                    <p class="card-text">{{ place.description }}</p>
+                    <reservation [placeId]="placeId" [place]="place" [price]="place.price"></reservation>
+                    <!-- <button class="btn btn-primary">Reserve</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 card-item">
+            <div class="card">
+                <div class="card-body add-review">
+                    <h5 class="card-title">Reviewes</h5>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item item" *ngFor="let review of place.reviewes">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{review?.user?.usename}}</h5>
+                                    <p>{{review.comment}}</p>
+
+                                    <p>{{review.date | date:'dd.MM.yyyy h:mm'}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <form [formGroup]="reviewForm"  (ngSubmit)="addReview()">
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea class="form-control" formControlName="comment"
+                             id="comment" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <ngb-rating [max]="5" formControlName="rating"></ngb-rating>
+                        </div>
+                        <button class="btn btn-primary">Add Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

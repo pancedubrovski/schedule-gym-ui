@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\reservations"
+  ],
+  "SelectedNode": "\\src\\app\\components\\reservations\\reservations.component.html",
+  "PreviewInSolutionExplorer": false
+}
