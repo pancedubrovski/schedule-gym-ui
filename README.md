@@ -1,27 +1,41 @@
-# ScheduleGymUi
+<b>SCHEDULE GYM</b>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+schedule gym e веб апликација која служи за закжување на термин во спортски објекти.
 
-## Development server
+<b>Техничка спецификација:</b>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+frontend: Angular
 
-## Code scaffolding
+backend: .net core
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+база на податоци: MS sql 
 
-## Build
+<b>Спецификација на features:</b>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+ • креирање профил две улоги (сопственик и корисник)
+ 
+ • Автентикација
+ 
+ • Авторизација
+ 
+ • додавање и обновување на спортски објект со слики  
+ • пребарување на слободна спортски објект според град, општина, време  
+ • пребарување на одреден објект со избор на термин преку календар каде визуелно ќе бидат прикажани слободните слотови
+ • закажување  на термин
+ • можност за оставање на коментар и рејтиг после употреба на објектот
+ • преглед на резервации
 
-## Running unit tests
+<b>Шема на база на податоци</b>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+• Шемата на базата на податоци вклучува табели за корисници,
+спортски објекти, ревјуа, закажани термини и слики.
+ Проектот користи Ms sql
+како релациона база на податоци.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+• Табелата за корисници ги содржи сите потребни информации за корисниците како што
+ се корисничко име, лозинка, е-пошта, телефонски број и улога (клиент, споственик). Табелата за
+  спортските објекти ги содржи сите детали,
+вклучувајќи наслов,
+ опис, цена, категорија, адреса и слика капацитет и рејтинг.
+  
+• Табелата за закажани термини  ги содржи датумот, време од време до опис, клиент вкупната цена
