@@ -2,21 +2,24 @@
 
   <nav>
     <ul>
-      @if( role == 'Customer'){
+      @if(isAuthenticated){
+        @if( role == 'Customer'){
         <li routerLink="/home"><a>Home</a></li>
         <li routerLink="/places"><a>Gyms</a></li>
         <li routerLink="/reservations"><a>My Resevations</a></li>
-      }
-      @else {
+        }
+        @else {
         <li routerLink="/places"><a>My Gyms</a></li>
         <li routerLink="/new-gym"><a>Add Gym</a></li>
         <li routerLink="/reservations"><a>Resevations</a></li>
+        }
       }
+      <li *ngIf="isAuthenticated" (click)="logout()" class="login"><a>Logout</a></li>
       <span *ngIf="!isAuthenticated">
         <li routerLink="/login" class="login"><a>Login</a></li>
         <li routerLink="/sign-up" class="login"><a>SignUp</a></li>
       </span>
-      <li *ngIf="isAuthenticated" (click)="logout()" class="login"><a>Logout</a></li>
+
     </ul>
   </nav>
   <div class="content">

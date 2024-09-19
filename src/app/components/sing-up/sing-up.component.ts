@@ -43,8 +43,8 @@ import { Router } from "@angular/router";
         }
         this.userService.register(body).subscribe((res: any) => {
             
-            this.userService.setDataToSession(res?.token);
-            this.router.navigate(['/home']);
+            // this.userService.setDataToSession(res?.token);
+            this.router.navigate(['/login']);
         })
     }
 

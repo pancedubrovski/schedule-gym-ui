@@ -4,7 +4,7 @@
             <fieldset class="form-inline ">
                 <div class="form-group ">
                     <label for="typeahead-http">City:</label>
-                    <input id="typeahead-http" type="text" class="form-control mx-sm-3"
+                    <input style="margin: none;" id="typeahead-http" type="text" class="form-control"
                         [class.is-invalid]="searchFailed" formControlName="city" placeholder="city" />
                     <small *ngIf="searching" class="form-text text-muted">searching...</small>
                     <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
@@ -32,7 +32,7 @@
 
                     <label for="date">Date</label>
 
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" />
+                    <input class="form-control"  formControlName="date" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" />
                     <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"
                         type="button">choose</button>
                 </div>

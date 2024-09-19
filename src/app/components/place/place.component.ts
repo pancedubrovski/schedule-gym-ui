@@ -21,7 +21,6 @@ export class PlaceComponent implements OnInit {
 
   constructor(protected placeService: PlaceService,
     protected scheduleService: ScheduleService,
-    //    private sanitizer: DomSanitizationService,
     private route: ActivatedRoute) { }
 
   public ngOnInit() {

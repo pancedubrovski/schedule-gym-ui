@@ -52,7 +52,6 @@ export class CreateGymComponent implements OnInit {
       this.router.navigate([`places`]);
     });
   }
-//IFormFileCollection
   public handleDragOver(event: any) {
 
   }
@@ -65,7 +64,6 @@ export class CreateGymComponent implements OnInit {
     
 
     const reader = new FileReader();
-    //this.imagePath = files;
     reader.readAsDataURL(this.file); 
     reader.onload = (_event) => { 
         this.imageUrl = reader.result;

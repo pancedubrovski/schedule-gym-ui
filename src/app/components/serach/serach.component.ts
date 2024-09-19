@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Params, Router } from '@angular/router';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'serach',
@@ -12,16 +11,16 @@ import { of } from 'rxjs';
 export class SerachComponent implements OnInit {
 
   public searchForm!: FormGroup;
-	public model?: NgbDateStruct;
+  public model?: NgbDateStruct;
   time = { hour: 13, minute: 30 };
   public serachFormControl: FormControl = new FormControl();
   public endTime: FormControl = new FormControl();
   searching = false;
   searchFailed = false;
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
-   public ngOnInit(): void {
+  public ngOnInit(): void {
     this.searchForm = new FormGroup({
       city: new FormControl(''),
       date: new FormControl(new Date()),
@@ -38,29 +37,23 @@ export class SerachComponent implements OnInit {
     return '';
   }
   search() {
-   
-    const queryParams: Params = {city: this.searchForm.controls['city']?.value,
-      startTime: this.getTimeString(this.searchForm.controls['startTime']),
-       endTime: this.getTimeString(this.searchForm.controls['endTime']),
-       date: new Date(this.searchForm.controls['date'].value).toISOString(),
-       kind: this.searchForm.controls['kind']?.value,
-       getFreeGyms: true
-      };
+    const d = this.searchForm.controls['date'].value;
+    const date = new Date(+d.year, +d.month - 1, +d.day);
+    const queryParams: Params = {
+      city: this.searchForm.controls['city']?.value,
+      startTime: this.getTimeString(date, this.searchForm.controls['startTime']),
+      endTime: this.getTimeString(date, this.searchForm.controls['endTime']),
+      date: date.toISOString(),
+      kind: this.searchForm.controls['kind']?.value,
+      getFreeGyms: true
+    };
 
-
-   
-
-
-    this.router.navigate(['/places'],{queryParams});
-  
- 
+    this.router.navigate(['/places'], { queryParams });
   }
 
-  private getTimeString(time: any): string{
-    const date = new Date(this.searchForm.controls['date'].value);
-   
+  private getTimeString(date: Date, time: any): string {
     date.setHours(time.value.hour);
     date.setMinutes(time.value.minute);
-    return date.toISOString();
+    return date.toLocaleTimeString();
   }
 }
