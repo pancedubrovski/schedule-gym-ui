@@ -7,7 +7,8 @@ export interface CreatePlace {
     address: string,
     description: string,
     ownerId: string,
-    price: number
+    price: number,
+    photos?: any
 
     
 }

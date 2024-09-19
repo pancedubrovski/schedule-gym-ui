@@ -41,9 +41,9 @@ import { Router } from "@angular/router";
             phoneNumber: this.formGroup.controls['phoneNumber']?.value,
             role: this.formGroup.controls['role']?.value,
         }
-        this.userService.register(body).subscribe(token => {
+        this.userService.register(body).subscribe((res: any) => {
             
-            this.userService.setDataToSession(token);
+            this.userService.setDataToSession(res?.token);
             this.router.navigate(['/home']);
         })
     }

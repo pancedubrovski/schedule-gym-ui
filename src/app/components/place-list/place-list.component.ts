@@ -14,6 +14,7 @@ export class PlaceListComponent implements OnInit {
   public pageSize = 10;
   public collectionSize = 10;
   public page = 1;
+  public role!: string;
 
   constructor(protected placeSerivce: PlaceService,
     private route: ActivatedRoute,
@@ -21,7 +22,7 @@ export class PlaceListComponent implements OnInit {
   ) {}
   public ngOnInit(){
 
-    
+    this.role = localStorage.getItem('role')!;
     if(this.filters == null){
       this.filters = {} as PlaceFilters;
     }
@@ -49,6 +50,11 @@ export class PlaceListComponent implements OnInit {
   }
   public openPlace(id: number){
     this.router.navigate([`place/${id}`]);
+  }
+
+  public deletePlace(id: number){
+    this.placeSerivce.delete(id);
+    this.refreshPlaces();
   }
 }
 

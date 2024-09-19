@@ -1,10 +1,14 @@
 <div *ngIf="isLoaded" class="contaner">
     <div class="row">
+        @if(successReservation){
+        <ngb-alert [type]="'success'" (closed)="successReservation = false">
+            {{ 'You reserve sucessfuly' }}</ngb-alert>
+        }
         <div class="col-md-7 col-sm-12 card-item">
             <ngb-carousel *ngIf="images" class="images" [showNavigationArrows]="true" [showNavigationIndicators]="true">
                 <ng-template ngbSlide *ngFor="let image of images">
                     <div class="picsum-img-wrapper">
-                        <img class="image" [src]="image" alt="Random slide" />
+                        <img class="image" [src]="image" />
                     </div>
                     <div class="carousel-caption">
                     </div>
@@ -29,8 +33,10 @@
                     </ul>
 
                     <p class="card-text">{{ place.description }}</p>
-                    <reservation [placeId]="placeId" [place]="place" [price]="place.price"></reservation>
+                    <reservation [placeId]="placeId" [place]="place" [price]="place.price"
+                        (reservePlace)="onReserve($event)"></reservation>
                     <!-- <button class="btn btn-primary">Reserve</button> -->
+
                 </div>
             </div>
         </div>
@@ -53,17 +59,17 @@
                             </div>
                         </li>
                     </ul>
-                    <form [formGroup]="reviewForm"  (ngSubmit)="addReview()">
+                    <form [formGroup]="reviewForm" (ngSubmit)="addReview()">
                         <div class="form-group">
                             <label for="comment">Comment:</label>
-                            <textarea class="form-control" formControlName="comment"
-                             id="comment" rows="3"></textarea>
+                            <textarea class="form-control" formControlName="comment" id="comment" rows="3"></textarea>
                         </div>
                         <div>
                             <ngb-rating [max]="5" formControlName="rating"></ngb-rating>
                         </div>
                         <button class="btn btn-primary">Add Review</button>
                     </form>
+
                 </div>
             </div>
         </div>

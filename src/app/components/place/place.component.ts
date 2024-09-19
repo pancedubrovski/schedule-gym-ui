@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ScheduleService } from '../../services/schedule.service';
 
-
 @Component({
   selector: 'app-place',
   templateUrl: './place.component.html',
@@ -13,15 +12,16 @@ import { ScheduleService } from '../../services/schedule.service';
 export class PlaceComponent implements OnInit {
 
   public placeId!: any;
-  public images = ['https://img.freepik.com/free-photo/3d-gym-equipment_23-2151114163.jpg',
-    'https://www.shutterstock.com/image-photo/modern-light-gym-sports-equipment-260nw-721723381.jpg'];
+  public images: string[] = [];
   public place: any;
 
   public isLoaded = false;
   public reviewForm!: FormGroup;
+  public successReservation: boolean = false;
 
   constructor(protected placeService: PlaceService,
     protected scheduleService: ScheduleService,
+    //    private sanitizer: DomSanitizationService,
     private route: ActivatedRoute) { }
 
   public ngOnInit() {
@@ -31,11 +31,19 @@ export class PlaceComponent implements OnInit {
     });
     this.placeId = this.route.snapshot.paramMap.get('placeId');
     this.placeService.getPalceById(this.placeId!).subscribe(res => {
-     
+
       this.place = res;
+
+      (res as any)?.photos.forEach((p: any) => {
+        const retrieveResonse = p.bytes;
+        const extension = p.fileExtension.slice(1);
+        this.images.push('data:image/' + extension + ';base64,' + retrieveResonse);
+      });
       this.isLoaded = true;
     })
   }
+
+  public retrievedImage: any;
 
   public addReview() {
     const body = {
@@ -51,4 +59,8 @@ export class PlaceComponent implements OnInit {
     });
 
   }
+  public onReserve(event: any) {
+    this.successReservation = true;
+  }
+
 }

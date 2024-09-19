@@ -5,6 +5,7 @@ import { environment } from '../../environments/environments';
 import { RegisterCommand } from '../models/register-command';
 import * as jwt_decode from 'jwt-decode';
 import { BehaviorSubject, finalize, map, Observable, of } from 'rxjs';
+import { LoginResponse } from '../models/logn-response';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class UserService {
 
   public login(body: LoginCommand) {
    
-    return this.http.post(`${environment.apiUrl}v1/schedule-gym/login`, body, { responseType: 'text' })
+    return this.http.post<LoginResponse>(`${environment.apiUrl}v1/schedule-gym/login`, body, { responseType: 'json' })
     .pipe(finalize(() => 
       this.isAuthenticatedSubject.next(true)));
   }
@@ -42,10 +43,11 @@ export class UserService {
 
 
   public setDataToSession(token: any) {
-
     localStorage.setItem('token', token);
     const decodetToken = jwt_decode.jwtDecode(token);
     localStorage.setItem('ownerId', (decodetToken as any)?.ownerId);
+    localStorage.setItem('role', (decodetToken as any)?.role);
+
   }
 }
 

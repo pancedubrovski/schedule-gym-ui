@@ -31,11 +31,15 @@ export class PlaceService {
     return this.http.get(`${environment.apiUrl}v1/schedule-gym/places/${id}`);
   }
   
-  public createPlace(body: CreatePlace){
+  public createPlace(form: FormData){
     const token = localStorage.getItem('token');
-    return this.http.post(`${environment.apiUrl}v1/schedule-gym/places`,body);
+    return this.http.post(`${environment.apiUrl}v1/schedule-gym/places`,form);
   }
   public getFreeGym(filters: PlaceFilters){
     return this.http.get(`${environment.apiUrl}v1/schedule-gym/free-places`);
+  }
+
+  public delete(id: number){
+    return this.http.delete(`${environment.apiUrl}v1/schedule-gym/places/${id}`);
   }
 }

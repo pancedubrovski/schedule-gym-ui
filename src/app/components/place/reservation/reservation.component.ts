@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbDate, NgbDateStruct, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleService } from '../../../services/schedule.service';
+import { Subject } from 'rxjs';
 
 interface Appointment {
     id: number;
@@ -22,10 +23,13 @@ export class RervationComponent implements OnInit {
     public form!: FormGroup;
     public hours?: number;
     public totalPrice?: number;
+    public successReservation?: string;
 
     @Input() placeId!: number;
     @Input() price!: number;
     @Input() place!: any;
+
+    @Output() reservePlace = new EventEmitter<boolean>();
 
 
     constructor(private modalService: NgbModal, protected scheduleService: ScheduleService) { }
@@ -52,7 +56,7 @@ export class RervationComponent implements OnInit {
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
     }
 
-    public reservePlace() {
+    public reserve() {
        
         const date = this.getDate(this.form.controls['date']);
         const body = {
@@ -66,8 +70,10 @@ export class RervationComponent implements OnInit {
         }
 
         this.scheduleService.scheduleGym(body).subscribe(res => {
-            this.form.reset()
-            this.modalService.dismissAll()
+            this.form.reset();
+            this.modalService.dismissAll();
+            this.reservePlace.emit(true);
+            this.successReservation = 'You sucessfuly reserve the term';
         });
     }
 

@@ -1,7 +1,7 @@
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Resservation</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
     </div>
     <div class="modal-body">
         <form [formGroup]="form">
@@ -38,8 +38,11 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="reservePlace()">Reserve</button>
+        <button type="button" class="btn btn-outline-dark" (click)="reserve()">Reserve</button>
     </div>
+    <!-- @if (successReservation) { -->
+        <ngb-alert #selfClosingAlert type="success" (closed)="successReservation = ''">{{ successReservation }}</ngb-alert>
+    <!-- } -->
 </ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Reserve</button>

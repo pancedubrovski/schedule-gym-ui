@@ -27,6 +27,7 @@ export class ReservationsComponent {
 
   public reservations: any = [];
   public groupByPlace: any = [];
+  public role!: string;
 
   public chartOptions?: any;
   
@@ -34,7 +35,16 @@ export class ReservationsComponent {
   }
   public ngOnInit(){
     const userId = String(localStorage.getItem("ownerId"));
-    this.scheduleService.retriveSchedules({userId,myPlaces: true}).subscribe((res: any) => {
+    this.role = localStorage.getItem('role')!;
+    let filteres: any = {
+      userId
+    };
+    if(this.role != 'Customer'){
+      filteres.myPlaces = true
+    }
+
+
+    this.scheduleService.retriveSchedules(filteres).subscribe((res: any) => {
     
       this.reservations = res;
       const places = this.reservations.map((a: any) => a.place.name)

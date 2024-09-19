@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginResponse } from '../../models/logn-response';
 
 
 @Component({
@@ -30,11 +31,10 @@ export class LoginComponent implements OnInit {
       password: this.form.controls['password'].value
     }
    
-    this.userService.login(body).subscribe((token) => {
-     this.userService.setDataToSession(token);
+    this.userService.login(body).subscribe((res: LoginResponse) => {
+     this.userService.setDataToSession(res?.token);
       this.router.navigate(['/home']);
     },error => {
-      console.log('error',error);
       this.errorMessage = error.error;
     });
   }

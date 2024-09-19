@@ -1,4 +1,3 @@
-
 <div class=" card container bg-light create-gym-form col-8 ">
 
     <form class="col-md-10 col-lg-8  col-sm-12 card-body" [formGroup]="form" (ngSubmit)="createPlace()">
@@ -15,6 +14,26 @@
                 </select>
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-12">
+                <label for="file" (dragover)="handleDragOver($event)" (drop)="handleDrop($event)">
+                    <i class="ph ph-upload"></i>
+
+                    <span>
+                        Drag & drop or
+                        <span>browse</span>
+                        your files
+                    </span>
+                </label>
+
+                <input type="file" class="form-control" id="UploadimgControlInput" formControlName="image" name="image"
+                    (change)="uploadImage($event)" placeholder="Upload Image">
+               
+                <img *ngIf="imageUrl"  [src]="imageUrl" width="70" height="70" style="margin: 10px" />
+               
+            </div>
+        </div>
+
         <div class="row">
             <div class="form-group col-4">
                 <label for="city" class="form-label">City</label>
@@ -42,11 +61,11 @@
             </div>
             <div class="form-group col-6">
                 <label for="price" class="form-label">Price</label>
-            <div class="input-group">
-                <input type="number" formControlName="price" class="form-control" id="price" placeholder="0.00">
-                <span class="input-group-text">EUR</span>
+                <div class="input-group">
+                    <input type="number" formControlName="price" class="form-control" id="price" placeholder="0.00">
+                    <span class="input-group-text">EUR</span>
+                </div>
             </div>
-        </div>
         </div>
         <button type="submit" class="btn btn-primary submit-button">Submit</button>
     </form>
